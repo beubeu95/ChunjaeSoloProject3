@@ -1,9 +1,13 @@
 package kr.co.teaspoon.dto;
 
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 @Data
-public class Board {
+@AllArgsConstructor
+@NoArgsConstructor
+public class Notice {
     private int seq;
     private String title;
     private String content;

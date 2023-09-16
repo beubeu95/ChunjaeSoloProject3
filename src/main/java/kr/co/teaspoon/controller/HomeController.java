@@ -18,7 +18,7 @@ public class HomeController {
                 DateFormat.LONG, locale);
         String today = dateFormat.format(date);
         model.addAttribute("today", today);
-        model.addAttribute("myName", "김기태");
+        model.addAttribute("myName", "김현경");
         return "/index";
     }
 }

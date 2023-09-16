@@ -11,20 +11,14 @@
 
     <!--  접근 자원에 대한 권한 설정 -->
     <resources mapping="/resources/**" location="/resources/" />
-    <resources mapping="/data/**" location="/data/" />
     <resources mapping="/admin/**" location="/WEB-INF/views/admin" />
-    <resources mapping="/board/**" location="/WEB-INF/views/board" />
-    <resources mapping="/check/**" location="/WEB-INF/views/check" />
     <resources mapping="/guestbook/**" location="/WEB-INF/views/guestbook" />
     <resources mapping="/free/**" location="/WEB-INF/views/free" />
-    <resources mapping="/include/**" location="/WEB-INF/views/include" />
+    <resources mapping="/setting/**" location="/WEB-INF/views/notice" />
     <resources mapping="/member/**" location="/WEB-INF/views/member" />
     <resources mapping="/notice/**" location="/WEB-INF/views/notice" />
     <resources mapping="/qna/**" location="/WEB-INF/views/qna" />
-    <resources mapping="/reservation/**" location="/WEB-INF/views/reservation" />
     <resources mapping="/util/**" location="/WEB-INF/views/util" />
-    <resources mapping="/sample/**" location="/WEB-INF/views/sample" />
-    <resources mapping="/sample2/**" location="/WEB-INF/views/sample2" />
     <resources mapping="/test/**" location="/WEB-INF/views/test" />
     <resources mapping="/error/**" location="/WEB-INF/views/error" />
 
@@ -46,7 +40,7 @@
 
     <!-- 멀티파트 업로드 디렉토리 지정 -->
     <beans:bean id="uploadPath" class="java.lang.String">
-        <beans:constructor-arg value="D:\kim\spring1\pro31\src\main\webapp\resources\upload" />
+        <beans:constructor-arg value="C:\hkdev\proj\solo\chunjaeSoloProject3\pro3/src\main\webapp\resources\upload" />
     </beans:bean>
 
     <!-- 기본 메인 패키지 및 컨트롤러 패키지 설정 -->
