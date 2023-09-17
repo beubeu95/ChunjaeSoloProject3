@@ -27,7 +27,7 @@
                     <li class="list-inline-item"><a href="#"><i class="ti-linkedin"></i></a></li>
                 </ul>
             </div>
-            <div class="container">
+            <div class="container" style="margin-left:50px;">
                 <div class="columns" style="margin: 30px; margin-left: 100px;">
                     <div class="column is-one-quarter">
                         <p class="title is-4">
@@ -40,9 +40,6 @@
                     <div class="column is-one-quarter">
                         <p class="title is-5">
                             <a href="${path}">커뮤니티</a>
-                        </p>
-                        <p class="bd-footer-link">
-                            <a href="${path}">공지사항</a>
                         </p>
                         <p class="bd-footer-link">
                             <a href="${path}">커뮤니티</a>
@@ -68,6 +65,9 @@
                     <div class="column is-one-quarter">
                         <p class="title is-5">
                             <a href="${path}">고객지원</a>
+                        </p>
+                        <p class="bd-footer-link">
+                            <a href="${path}">공지사항</a>
                         </p>
                         <p class="bd-footer-link">
                             <a href="${path}">FAQ</a>

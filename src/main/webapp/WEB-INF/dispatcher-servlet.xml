@@ -12,15 +12,14 @@
     <!--  접근 자원에 대한 권한 설정 -->
     <resources mapping="/resources/**" location="/resources/" />
     <resources mapping="/admin/**" location="/WEB-INF/views/admin" />
-    <resources mapping="/guestbook/**" location="/WEB-INF/views/guestbook" />
-    <resources mapping="/free/**" location="/WEB-INF/views/free" />
-    <resources mapping="/setting/**" location="/WEB-INF/views/notice" />
+    <resources mapping="/setting/**" location="/WEB-INF/views/setting" />
     <resources mapping="/member/**" location="/WEB-INF/views/member" />
     <resources mapping="/notice/**" location="/WEB-INF/views/notice" />
     <resources mapping="/qna/**" location="/WEB-INF/views/qna" />
+    <resources mapping="/reservation/**" location="/WEB-INF/views/reservation" />
     <resources mapping="/util/**" location="/WEB-INF/views/util" />
-    <resources mapping="/test/**" location="/WEB-INF/views/test" />
-    <resources mapping="/error/**" location="/WEB-INF/views/error" />
+    <resources mapping="/faq/**" location="/WEB-INF/views/faq" />
+    <resources mapping="/filboard/**" location="/WEB-INF/views/fileboard" />
 
     <!-- 컨트롤러에서 던진 URL : /notice/noticeList -->
     <!-- 실제 존재하는 URL : /WEB-INF/views/notice/noticeList.jsp -->
@@ -46,11 +45,6 @@
     <!-- 기본 메인 패키지 및 컨트롤러 패키지 설정 -->
     <context:component-scan base-package="kr.co.teaspoon.controller" />
     <annotation-driven />
-
-    <beans:bean id="fileDownLoadView" class="kr.co.teaspoon.controller.FileDownLoadView"/>
-    <beans:bean id="fileViewResolver" class="org.springframework.web.servlet.view.BeanNameViewResolver">
-        <beans:property name="order" value="0" />
-    </beans:bean>
 
     <!-- 인터셉터 : 글쓰기와 같은 회원권한을 가진 경우는 반드시 로그인 페이지를 거쳐서 시도할 것  -->
     <!-- <beans:bean id="sampleIntercepter" class="kr.co.teaspoon.util.SampleInterceptor" />

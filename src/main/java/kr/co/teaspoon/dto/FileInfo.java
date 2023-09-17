@@ -8,7 +8,9 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 public class FileInfo {
-    private String saveFolder;
-    private String originFile;
-    private String saveFile;
+    private int no; //첨부파일 첨부된 번호
+    private int articleno; //자료실 글번호
+    private String saveFolder; //저장된 폴더이름
+    private String originFile; //실제 저장된 파일이름
+    private String saveFile; //랜덤 이름 설정된 파일 이름
 }
