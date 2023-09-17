@@ -16,10 +16,13 @@
     <resources mapping="/member/**" location="/WEB-INF/views/member" />
     <resources mapping="/notice/**" location="/WEB-INF/views/notice" />
     <resources mapping="/qna/**" location="/WEB-INF/views/qna" />
-    <resources mapping="/reservation/**" location="/WEB-INF/views/reservation" />
     <resources mapping="/util/**" location="/WEB-INF/views/util" />
     <resources mapping="/faq/**" location="/WEB-INF/views/faq" />
     <resources mapping="/filboard/**" location="/WEB-INF/views/fileboard" />
+    <resources mapping="/event/**" location="/WEB-INF/views/event" />
+    <resources mapping="/comment/**" location="/WEB-INF/views/comment" />
+    <resources mapping="/community/**" location="/WEB-INF/views/community" />
+    <resources mapping="/apply/**" location="/WEB-INF/views/apply" />
 
     <!-- 컨트롤러에서 던진 URL : /notice/noticeList -->
     <!-- 실제 존재하는 URL : /WEB-INF/views/notice/noticeList.jsp -->

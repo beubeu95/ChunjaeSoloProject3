@@ -128,6 +128,9 @@ CREATE TABLE fileInfo(
   saveFolder VARCHAR(300) NOT NULL,
   originFile VARCHAR(300) NOT NULL,
   saveFile VARCHAR(300) NOT NULL);
+  
+  SELECT * FROM fileinfo;
+  
 
 CREATE TABLE fileboard (
   articleno int NOT NULL AUTO_INCREMENT PRIMARY KEY,
@@ -136,6 +139,8 @@ CREATE TABLE fileboard (
   content varchar(2000) NOT NULL,
   regdate timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP
 );
+
+SELECT * FROM fileboard;
 
 CREATE TABLE qna(
   qno int PRIMARY KEY AUTO_INCREMENT,   		
@@ -155,3 +160,35 @@ INSERT INTO	qna VALUES(DEFAULT, '답변1','답변1내용','admin', DEFAULT, 1,1)
 SELECT * FROM qna;
 
 select qno, title, author, resdate from qna q join member m on(q.author=m.id) where par in (select par from qna group by par having count(par) < 2);
+
+-- 이벤트 테이블 생성
+CREATE TABLE event (
+	eno int  PRIMARY KEY AUTO_INCREMENT,
+	title VARCHAR(100) NOT NULL,
+	content VARCHAR(1000) NOT NULL,
+	STATUS VARCHAR(5) CHECK(status IN(0, 1)),
+	sdate DATE,
+	edate DATE,
+	author VARCHAR(16),
+	regdate TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+	cnt INT DEFAULT 0 NOT NULL
+);
+
+SELECT * FROM EVENT;
+
+--이벤트 신청자 정보 테이블 생성
+CREATE TABLE apply(
+	appNo INT PRIMARY KEY AUTO_INCREMENT,
+	eno INT NOT NULL,
+	name VARCHAR(20) NOT NULL,
+	email VARCHAR(100) NOT NULL,
+	tel VARCHAR(20) NOT NULL,
+	addr1 VARCHAR(200),
+	addr2 VARCHAR(100),
+	postcode VARCHAR(10),
+	FOREIGN KEY(eno) REFERENCES event(eno) ON DELETE CASCADE,
+	FOREIGN KEY(name) REFERENCES member(id) ON DELETE CASCADE
+);
+
+SELECT * FROM apply;
+
