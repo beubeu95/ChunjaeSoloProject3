@@ -1,6 +1,7 @@
 CREATE DATABASE teaspoon;
 USE teaspoon;
 
+
 -- 멤버  테이블
 CREATE TABLE MEMBER(
 	id VARCHAR(20) PRIMARY KEY NOT NULL,

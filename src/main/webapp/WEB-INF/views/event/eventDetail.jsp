@@ -32,33 +32,33 @@
     <div class="container">
         <div class="columns is-desktop is-justify-content-center">
             <div class="column is-10-desktop">
-                <div class="container">
-                    <table id="table1">
-                        <tbody>
-                        <tr>
-                            <th style="background-color:#dcdcdc">글 제목</th>
-                            <td>${event.title }</td>
-                        </tr>
-                        <tr>
-                            <th style="background-color:#dcdcdc">이벤트기간</th>
-                            <td>${event.sdate } ~ ${event.edate}</td>
-                        </tr>
-                        <tr>
-                            <th style="background-color:#dcdcdc">읽은 횟수</th>
-                            <td>${event.cnt }</td>
-                        </tr>
-                        <tr>
-                            <th style="background-color:#dcdcdc">글 내용</th>
-                            <td><p>${event.content }</p></td>
-                        </tr>
-                        </tbody>
-                    </table>
-                    <div class="button-group">
-                        <a class="button is-info" href="${path}/event/list.do">글 목록</a>
-                        <c:if test='${sid eq "admin"}'>
-                            <a class="button is-primary" href="${path}/event/delete.do?bno=${event.eno}">글 삭제</a>
-                            <a class="button is-danger" href="${path}/event/edit.do?bno=${event.eno}">글 수정</a>
-                        </c:if>
+                <div class="content" id="content" style="margin-top: 100px;">
+                    <div class="row column text-center">
+                        <div class="container">
+                            <table id="table">
+                                <tbody>
+                                <tr style="border-top: solid #808080FF 1px;">
+                                    <td style="font-weight: bold; font-size: 30px;">${event.title }</td>
+                                </tr>
+                                <tr style="border-bottom: solid #808080FF 1px;">
+                                    <td style="border-bottom: solid #808080FF 1px;"><p>이벤트 기간 | ${event.sdate } ~ ${event.edate}</p></td>
+                                </tr>
+                                <tr style="border-bottom: solid grey 1px;">
+                                    <td style="padding-top: 50px; padding-bottom: 50px;"><p>${event.content }</p></td>
+                                </tr>
+                                </tbody>
+                            </table>
+                            <div class="button-group" style="margin-top: 30px; float: right; margin-bottom: 100px;">
+                                <c:if test='${sid eq "admin"}'>
+                                    <a class="btn btn-sm btn-outline-primary ml-4" href="${path}/event/delete.do?eno=${event.eno}" style="text-decoration:none;">글 삭제</a>
+                                    <a class="btn btn-sm btn-primary ml-4" href="${path}/event/edit.do?eno=${event.eno}" style="color:#fff; text-decoration:none;">글 수정</a>
+                                </c:if>
+                                <c:if test='${sid ne null && sid ne "admin"}'>
+                                    <a class="btn btn-sm btn-primary ml-4" href="${path}" style="color:#fff; text-decoration:none;">신청</a>
+                                </c:if>
+                                <a class="btn btn-sm btn-outline-primary ml-4" href="${path}/event/list.do" style="float:right; text-decoration:none;">글 목록</a>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>

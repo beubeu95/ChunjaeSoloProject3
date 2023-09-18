@@ -23,13 +23,7 @@
             <!--메뉴바 시작 -->
             <div class="navbar-start ml-auto">
                 <div class="navbar-item has-dropdown is-hoverable">
-                    <a class="navbar-link" href="${path}">Home</a>
-                    <div class="navbar-dropdown">
-                    <a href="${path }" class="navbar-item">소개</a>
-                    </div>
-                </div>
-                <div class="navbar-item has-dropdown is-hoverable">
-                    <a class="navbar-link" href="${path}/community/list.do">커뮤니티</a>
+                    <a class="navbar-link" href="${path}/community/list.do">게시판</a>
                     <div class="navbar-dropdown">
                         <a href="${path}/community/list.do" class="navbar-item">커뮤니티</a>
                         <a href="${path}/fileboard/list.do" class="navbar-item">자료실</a>
@@ -43,7 +37,7 @@
                     </div>
                 </div>
                 <div class="navbar-item has-dropdown is-hoverable">
-                    <a class="navbar-link" href="${path}/notice/list.do">고객지원</a>
+                    <a class="navbar-link" href="${path}/notice/list.do">문의</a>
                     <div class="navbar-dropdown">
                         <a href="${path}/notice/list.do" class="navbar-item">공지사항</a>
                         <a href="${path}/faq/list.do" class="navbar-item">FAQ</a>

@@ -37,7 +37,7 @@
                             <div>
                             <!-- 이벤트 관리자만 글쓰기 가능 처리 -->
                             <c:if test='${sid eq "admin"}'>
-                                <div class="button-group" style="float:right; margin-left:20px;">
+                                <div class="button-group" style="float:right; margin-left:20px; margin-bottom:30px;">
                                     <a class="btn btn-sm btn-outline-primary ml-4" href="${path }/event/insert.do" style="text-decoration: none;">글쓰기</a>
                                 </div>
                             </c:if>
@@ -47,7 +47,7 @@
                                 <tr>
                                     <th width="80">번호</th>
                                     <th>제목</th>
-                                    <th width="120">이벤트상태</th>
+                                    <th width="200">이벤트상태</th>
                                     <th width="100">작성자</th>
                                     <th width="120">작성일</th>
                                     <th width="100">조회수</th>
