@@ -27,6 +27,7 @@
 </section>
 <!-- 배너 영역 끝 -->
 
+<<<<<<< HEAD
 <!-- 이벤트 시작-->
 <div class="content" id="content" style="margin-top: 100px;">
     <div class="row column text-center" >
@@ -37,6 +38,42 @@
                     <a class="button is-primary" href="${path}/event/edit.do?eno=${event.eno}" style="margin-left:10px; margin-right:10px; background-color: #FF0043; text-decoration: none;">글 수정</a>
                 </c:if>
                 <a class="button" href="${path}/event/list.do" style="float:right; color:#0a0a0a; text-decoration: none;">글 목록</a>
+=======
+<!-- 이벤트 글 상세보기 시작-->
+<section class="section">
+    <div class="container">
+        <div class="columns is-desktop is-justify-content-center">
+            <div class="column is-10-desktop">
+                <div class="content" id="content" style="margin-top: 100px;">
+                    <div class="row column text-center">
+                        <div class="container">
+                            <table id="table">
+                                <tbody>
+                                <tr style="border-top: solid #808080FF 1px;">
+                                    <td style="font-weight: bold; font-size: 30px;">${event.title }</td>
+                                </tr>
+                                <tr style="border-bottom: solid #808080FF 1px;">
+                                    <td style="border-bottom: solid #808080FF 1px;"><p>이벤트 기간 | ${event.sdate } ~ ${event.edate}</p></td>
+                                </tr>
+                                <tr style="border-bottom: solid grey 1px;">
+                                    <td style="padding-top: 50px; padding-bottom: 50px;"><p>${event.content }</p></td>
+                                </tr>
+                                </tbody>
+                            </table>
+                            <div class="button-group" style="margin-top: 30px; float: right; margin-bottom: 100px;">
+                                <c:if test='${sid eq "admin"}'>
+                                    <a class="btn btn-sm btn-outline-primary ml-4" href="${path}/event/delete.do?eno=${event.eno}" style="text-decoration:none;">글 삭제</a>
+                                    <a class="btn btn-sm btn-primary ml-4" href="${path}/event/edit.do?eno=${event.eno}" style="color:#fff; text-decoration:none;">글 수정</a>
+                                </c:if>
+                                <c:if test='${sid ne null && sid ne "admin"}'>
+                                    <a class="btn btn-sm btn-primary ml-4" href="${path}" style="color:#fff; text-decoration:none;">신청</a>
+                                </c:if>
+                                <a class="btn btn-sm btn-outline-primary ml-4" href="${path}/event/list.do" style="float:right; text-decoration:none;">글 목록</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+>>>>>>> 75a58f382c510fa132e7c0dadf526e9beaa60860
             </div>
             <table id="table">
                 <tbody>
