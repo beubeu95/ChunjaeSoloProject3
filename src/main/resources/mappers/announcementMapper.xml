@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="announcement">
+
+    <!-- 당첨자 발표 게시글 목록 -->
+    <select id="announcementList" resultType="kr.co.teaspoon.dto.Announcement">
+        select * from announcement order by resdate desc
+    </select>
+
+    <!-- 당첨자 발표 게시글 카운트 -->
+    <select id="count" resultType="integer" >
+        select count(*) from announcement
+    </select>
+
+    <!--당첨자 발표 게시글 상세보기 -->
+    <select id="announcementDetail" resultType="kr.co.teaspoon.dto.Announcement">
+        select * from announcement where ano=#{ano}
+    </select>
+
+    <!-- 당첨자 발표 글쓰기 -->
+    <insert id="announcementInsert">
+        insert into announcement values (default, #{eno}, #{title}, #{content}, #{author}, default)
+    </insert>
+
+    <update id="announcementUpdate">
+        update announcement set title=#{title}, content=#{content} where ano=#{ano}
+    </update>
+
+    <delete id="announcementDelete">
+        delete from announcement where ano=#{ano}
+    </delete>
+
+    <update id="Count">
+        update announcement set cnt=cnt+1 where ano=#{ano}
+    </update>
+
+</mapper>

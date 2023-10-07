@@ -39,7 +39,7 @@
                     <a class="navbar-link" href="${path}">이벤트</a>
                     <div class="navbar-dropdown">
                         <a href="${path }/event/list.do" class="navbar-item">이벤트</a>
-                        <a href="${path }" class="navbar-item">이벤트발표</a>
+                        <a href="${path }/announcement/list.do" class="navbar-item">이벤트발표</a>
                     </div>
                 </div>
                 <div class="navbar-item has-dropdown is-hoverable">

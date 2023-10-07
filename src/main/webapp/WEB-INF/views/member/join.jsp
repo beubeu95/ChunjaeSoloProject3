@@ -37,7 +37,7 @@
                         <div class="column is-10-tablet">
                             <label for="id" class="label"> 아이디 </label>
                             <div class="columns">
-                                <div class="column is-four-fifths">
+                                <div class="column is-four-fifths" style="padding-right: 0px;">
                                     <div class="control">
                                         <input type="text" class="input" id="id" name="id" placeholder="영문 소문자, 숫자를 혼용하여 아이디를 입력해주세요"
                                                pattern="^[a-z0-9]{8,16}" maxlength="16" autocomplete="off" autofocus required>
@@ -46,7 +46,7 @@
                                     </div>
                                 </div>
                                 <div class="column">
-                                    <button type="button" class="btn btn-sm btn-outline-primary ml-4" onclick="idCheck()"> 중복확인 </button>
+                                    <button type="button" class="btn btn-sm btn-outline-primary ml-4" onclick="idCheck()" style="width: 100px; padding-right: 10px; padding-left: 10px;"> 중복확인 </button>
                                 </div>
                             </div>
                         </div>
@@ -108,7 +108,7 @@
                         </div>
                         <div class="column is-10-tablet is-10">
                             <button type="submit" class="button is-primary is-fullwidth" style=" background-color :#ff3369;"> 회원가입 </button>
-                            <p class="has-text-centered mt-4"> 이미 회원이신가요? <a href="${path}/login.do" style="font-weight: bold;"> 로그인하기 </a> </p>
+                            <p class="has-text-centered mt-4"> 이미 회원이신가요? <a href="${path}/member/login.do" style="font-weight: bold;"> 로그인하기 </a> </p>
                         </div>
                     </form>
                 </div>

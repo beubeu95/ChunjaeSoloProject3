@@ -27,124 +27,73 @@
 </section>
 <!-- 배너 영역 끝 -->
 
-<!-- 이벤트 글 상세보기 시작-->
-<section class="section">
-    <div class="container">
-        <div class="columns is-desktop is-justify-content-center">
-            <div class="column is-10-desktop">
-                <div class="container">
-                    <table id="table1">
-                        <tbody>
-                        <tr>
-                            <th style="background-color:#dcdcdc">글 제목</th>
-                            <td>${event.title }</td>
-                        </tr>
-                        <tr>
-                            <th style="background-color:#dcdcdc">이벤트기간</th>
-                            <td>${event.sdate } ~ ${event.edate}</td>
-                        </tr>
-                        <tr>
-                            <th style="background-color:#dcdcdc">읽은 횟수</th>
-                            <td>${event.cnt }</td>
-                        </tr>
-                        <tr>
-                            <th style="background-color:#dcdcdc">글 내용</th>
-                            <td><p>${event.content }</p></td>
-                        </tr>
-                        </tbody>
-                    </table>
-                    <div class="button-group">
-                        <a class="button is-info" href="${path}/event/list.do">글 목록</a>
-                        <c:if test='${sid eq "admin"}'>
-                            <a class="button is-primary" href="${path}/event/delete.do?bno=${event.eno}">글 삭제</a>
-                            <a class="button is-danger" href="${path}/event/edit.do?bno=${event.eno}">글 수정</a>
-                        </c:if>
-                    </div>
-                </div>
+<!-- 이벤트 시작-->
+<div class="content" id="content" style="margin-top: 100px;">
+    <div class="row column text-center" >
+        <div class="container">
+            <div class="buttons is-right" style="margin-top: 30px;">
+                <c:if test='${sid eq "admin"}'>
+                    <a class="button" href="${path}/event/delete.do?eno=${event.eno}" style="color:#0a0a0a; text-decoration: none;">글 삭제</a>
+                    <a class="button is-primary" href="${path}/event/edit.do?eno=${event.eno}" style="margin-left:10px; margin-right:10px; background-color: #FF0043; text-decoration: none;">글 수정</a>
+                </c:if>
+                <a class="button" href="${path}/event/list.do" style="float:right; color:#0a0a0a; text-decoration: none;">글 목록</a>
             </div>
+            <table id="table">
+                <tbody>
+                <tr style="border-top: solid #808080FF 1px;">
+                    <td style="font-weight: bold; font-size: 30px;">${event.title }</td>
+                </tr>
+                <tr style="border-bottom: solid #808080FF 1px;">
+                    <td style="border-bottom: solid #808080FF 1px;">
+                        <p class="mb-0" style="font-weight: bold;">이벤트 기간 | ${event.sdate } ~ ${event.edate}</p>
+                    </td>
+                </tr>
+                <tr style="border-bottom: solid grey 1px;">
+                    <td style="padding-top: 50px; padding-bottom: 50px;"><p>${event.content }</p></td>
+                </tr>
+                </tbody>
+            </table>
+            <div class="container mb-100">
+                <c:if test="${sid ne null && event.status eq '1'}">
+                <div class="container">
+                    <input type="hidden" name="id" id="id" value="${sid}">
+                    <input type="hidden" id="eno" name="eno" value="${event.eno}">
+                    <input type="hidden" name="app_chk" id="app_chk" value="no">
+                    <button type="button" id="ck_btn" class="button is-fullwidth is-primary" onclick="appCheck()" style="height:72px; background-color: #FF0043;">신청하기</button>
+                </div>
+                <script>
+                    function appCheck() {
+                        var child;
+                        let params = { id: $("#id").val(), eno: $("#eno").val()};
+                        $.ajax({
+                            url: "${path}/apply/appCheck.do",
+                            type: "post",
+                            dataType: "json",
+                            data: params,
+                            success:function(data) {
+                                console.log("HI");
+                                let appPass = data.result;
+                                if(!appPass) {
+                                    //$("#app_chk").val("no");
+                                    alert("이미 신청한 회원입니다.");
+                                } else {
+                                    //$("#app_chk").val("yes");
+                                    child = window.open("${path}/apply/insert.do?eno="+$("#eno").val()+"&id="+$("#id").val(), "child", "width=700, height=500");
+                                }
+                            },
+                            error:function(res) {
+                                alert(" 잠시 후 다시 시도해주세요.");
+                                console.log(res.responseText);
+                            }
+                        })
+                    }
+                </script>
+            </div>
+            </c:if>
         </div>
     </div>
-</section>
-<!-- 이벤트 글 상세보기 끝 -->
-
-<!-- 이벤트 신청하기 시작-->
-<div class="container">
-    <form action="${path}/apply/insert.do" method="post" class="columns mt-5">
-        <div class="column is-four-fifths">
-            <div class="field is-horizontal" style="height: 60px; margin-bottom:0px;">
-                <div class="field-label is-normal">
-                    <label class="label">이메일</label>
-                </div>
-                <div class="field-body">
-                    <div class="field">
-                        <p class="control">
-                            <input type="email" name="email" id="email" placeholder="이메일 입력" maxlength="98" class="input" required>
-                        </p>
-                    </div>
-                </div>
-            </div>
-            <div class="field is-horizontal" style="height: 60px; margin-bottom:0px;">
-                <div class="field-label is-normal">
-                    <label class="label">전화번호</label>
-                </div>
-                <div class="field-body">
-                    <div class="field">
-                        <p class="control">
-                            <input type="tel" name="tel" id="tel" placeholder="번호 입력" maxlength="98" class="input" required>
-                        </p>
-                    </div>
-                </div>
-            </div>
-            <div class="field is-horizontal" style="height: 60px; margin-bottom:0px;">
-                <div class="field-label is-normal">
-                    <label class="label">주소</label>
-                </div>
-                <div class="field-body">
-                    <div class="field">
-                        <p class="control">
-                            <input type="text" id="addr1" name="addr1" placeholder="기본 주소를  입력해주세요" class="input" autocomplete="off" readonly>
-                            <input type="text" id="addr2" name="addr2" placeholder="상세 주소를 입력해주세요" class="input mt-3" autocomplete="off" required>
-
-                            <div class="column is-9-tablet">
-                                <div class="control">
-                                    <input type="text" id="postcode" name="postcode" placeholder="우편번호를 입력해주세요" class="input" autocomplete="off" readonly>
-                                </div>
-                            </div>
-                            <div class="column is-3-tablet pl-0">
-                                <button type="button" class="btn btn-sm btn-outline-primary ml-4" onclick="findAddr()"> 우편번호  </button>
-                            </div>
-                        </p>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="column">
-            <input type="hidden" id="name" name="name" value="sid">
-            <input type="hidden" id="eno" name="eno" value="${event.eno}">
-            <input type="submit" class="button is-fullwidth is-primary" style="height:72px" value="전송">
-        </div>
-    </form>
-    <script>
-        function findAddr() {
-            new daum.Postcode({
-                oncomplete: function (data) {
-                    console.log(data);
-                    var roadAddr = data.roadAddress;
-                    var jibunAddr = data.jibunAddress;
-                    document.getElementById("postcode").value = data.zonecode;
-                    if (roadAddr !== '') {
-                        document.getElementById("addr1").value = roadAddr;
-                    } else if (jibunAddr !== '') {
-                        document.getElementById("addr1").value = jibunAddr;
-                    }
-                    document.getElementById("addr2").focus();
-                }
-            }).open();
-        }
-    </script>
-    <script src="https://t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 </div>
-<!-- 이벤트 신청하기 끝-->
+<!-- 이벤트 끝-->
 
 <!-- 푸터 시작 -->
 <jsp:include page="../setting/footer.jsp" />

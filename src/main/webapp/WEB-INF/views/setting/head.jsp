@@ -29,7 +29,7 @@
 <script src="${path1 }/resources/plugins/masonry/masonry.min.js"></script>
 <script src="${path1 }/resources/plugins/clipboard/clipboard.min.js"></script>
 <script src="${path1 }/resources/plugins/match-height/jquery.matchHeight-min.js"></script>
-
+<script src="https://kit.fontawesome.com/b22cfe0297.js" crossorigin="anonymous"></script>
 <!-- Main Stylesheet -->
 <link href="${path1 }/resources/css/style.css" rel="stylesheet">
 

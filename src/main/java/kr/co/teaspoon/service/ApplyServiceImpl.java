@@ -12,8 +12,24 @@ public class ApplyServiceImpl implements ApplyService{
     private ApplyDAO applyDAO;
 
     @Override
-    public int getCount(int appNo) throws Exception {
-        return applyDAO.getCount(appNo);
+    public Apply getApply(String id, int eno) throws Exception {
+        return applyDAO.getApply(id,eno);
+    }
+
+    @Override
+    public boolean appCheck(String id, int eno) throws Exception {
+        Apply apply = applyDAO.getApply(id,eno);
+
+        if (apply!= null && apply.getEno() == eno) {
+            return false;
+        }
+
+        return true;
+    }
+
+    @Override
+    public int getCount(int appno) throws Exception {
+        return applyDAO.getCount(appno);
     }
 
     @Override
@@ -22,7 +38,12 @@ public class ApplyServiceImpl implements ApplyService{
     }
 
     @Override
-    public void applyDelete(int appNo) throws Exception {
-        applyDAO.applyDelete(appNo);
+    public void applyDelete(int appno) throws Exception {
+        applyDAO.applyDelete(appno);
+    }
+
+    @Override
+    public int applyCnt() throws Exception {
+        return applyDAO.applyCnt();
     }
 }

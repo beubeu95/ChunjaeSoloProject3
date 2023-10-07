@@ -38,7 +38,7 @@
                             <!-- 이벤트 관리자만 글쓰기 가능 처리 -->
                             <c:if test='${sid eq "admin"}'>
                                 <div class="button-group" style="float:right; margin-left:20px;">
-                                    <a class="btn btn-sm btn-outline-primary ml-4" href="${path }/event/insert.do" style="text-decoration: none;">글쓰기</a>
+                                    <a class="btn btn-sm btn-outline-primary ml-4" href="${path }/event/insert.do" style="text-decoration: none; margin-bottom: 24px;">글쓰기</a>
                                 </div>
                             </c:if>
                             </div>
@@ -59,7 +59,7 @@
                                         <td>${status.count }</td>
                                         <td ><a href="${path}/event/detail.do?eno=${event.eno }" style="color: #000000; text-decoration: none;">${event.title }</a></td>
                                         <c:if test='${event.status eq "1"}'>
-                                        <td>이벤트 진행중</td>
+                                        <td>진행중</td>
                                         </c:if>
                                         <c:if test='${event.status eq "0"}'>
                                         <td>이벤트 종료</td>

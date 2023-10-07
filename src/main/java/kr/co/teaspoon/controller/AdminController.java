@@ -1,16 +1,16 @@
 package kr.co.teaspoon.controller;
 
-import kr.co.teaspoon.dto.Qna;
-import kr.co.teaspoon.service.QnaService;
+import kr.co.teaspoon.dto.*;
+import kr.co.teaspoon.service.*;
 import kr.co.teaspoon.util.Page;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import java.util.List;
 
 @Controller
@@ -18,7 +18,35 @@ import java.util.List;
 public class AdminController {
 
     @Autowired
+    HttpSession session;
+
+    @Autowired
+    private FileboardService fileboardService;
+
+    @Autowired
+    private FileInfoService fileInfoService;
+
+    @Autowired
+    private MemberService memberService;
+
+    @Autowired
+    private AnnouncementService announcementService;
+
+    @Autowired
+    private LottoService lottoService;
+
+    @Autowired
+    private CommunityService communityService;
+
+    @Autowired
     private QnaService qnaService;
+
+    @Autowired
+    private EventService eventService;
+
+    @Autowired
+    private ApplyService applyService;
+
 
     @GetMapping("questionList.do")
     public String getNoAnswerList(HttpServletRequest request, Model model) throws Exception {
@@ -39,5 +67,115 @@ public class AdminController {
         List<Qna> noAnswerList = qnaService.noAnswerList();
         model.addAttribute("noAnswerList", noAnswerList);     //QnA 목록
         return "/admin/noAnswerList";
+    }
+
+    @GetMapping("adminFileList.do")		//board/list.do
+    public String getBoardList(Model model) throws Exception {
+        List<Fileboard> fileboardList = fileboardService.fileList();
+        model.addAttribute("fileboardList", fileboardList);
+        return "/admin/adminFileboard";
+    }
+
+
+    @GetMapping("delete.do")
+    public String noticeDelete(HttpServletRequest request, Model model) throws Exception {
+        int articleno = Integer.parseInt(request.getParameter("articleno"));
+        fileboardService.fileboardDelete(articleno);
+        return "redirect:adminList.do";
+    }
+
+    @GetMapping("adminEventList.do")
+    public String getEventList(HttpServletRequest request, HttpServletResponse response, Model model) throws Exception {
+        int curPage = request.getParameter("page") != null ? Integer.parseInt(request.getParameter("page")) : 1;
+
+        Page page = new Page();
+
+        // 페이징에 필요한 데이터 저장
+        int total = eventService.getCount(page);
+        page.makeBlock(curPage, total);
+        page.makeLastPageNum(total);
+        page.makePostStart(curPage, total);
+
+        List<Event> eventList = eventService.eventList(page);
+
+        model.addAttribute("eventList", eventList);
+        model.addAttribute("curPage", curPage);
+        model.addAttribute("page", page);
+
+
+        return "/admin/adminEventList";
+    }
+
+    @GetMapping("adminMemberList.do")
+    public String adminMemberList(Model model) throws Exception {
+        List<Member> memberList = memberService.memberList();
+        model.addAttribute("memberList", memberList);
+        return "/admin/adminMemberList";
+    }
+
+    @RequestMapping(value="memberDelete.do", method = RequestMethod.GET)
+    public String memberDelete(@RequestParam String id, Model model, HttpSession session) throws Exception {
+        memberService.memberDelete(id);
+        session.invalidate();
+        return "redirect: adminMemberList.do";
+    }
+
+    //이벤트 참여자 리스트
+    @GetMapping("applyList.do")
+    public String applyList(HttpServletRequest request, Model model) throws Exception {
+        int eno = Integer.parseInt(request.getParameter("eno"));
+
+        List<Apply> applyList = lottoService.applyList(eno);
+        model.addAttribute("applyList", applyList);
+        model.addAttribute("eno", eno);
+        return "/admin/applyList";
+    }
+
+    //5명 추첨
+    @GetMapping("lottoList.do")
+    public String winners(HttpServletRequest request, Model model) throws Exception {
+        int eno = Integer.parseInt(request.getParameter("eno"));
+
+        List<Lotto> lottoList = lottoService.lottoList(eno);
+        model.addAttribute("lottoList", lottoList);
+        model.addAttribute("eno", eno);
+        return "/admin/winners";
+    }
+
+    @GetMapping("lottoInsert.do")
+    public String lottoInsert(HttpServletRequest request, Model model) throws Exception {
+        int eno = Integer.parseInt(request.getParameter("eno"));
+        List<Lotto> lottoList = lottoService.lottoList(eno);
+        for(Lotto lotto : lottoList) {
+            String name = lotto.getName();
+            String firstName = name.substring(0,1);
+            String lastName = name.substring(2,3);
+            name = firstName+"*"+lastName;
+
+            String id = lotto.getId();
+            String hiddenid = id.substring(0,4);
+            id = hiddenid+"***";
+
+            lotto.setName(name);
+            lotto.setId(id);
+        }
+        Event event = eventService.eventDetail(eno);
+        model.addAttribute("lottoLost", lottoList);
+        model.addAttribute("event", event);
+
+        return "/admin/lottoInsert";
+    }
+
+    @PostMapping("announcementInsert.do")
+    public String getInsertPro(HttpServletRequest request, Model model) throws Exception {
+        HttpSession session = request.getSession();
+        Announcement dto = new Announcement();
+        dto.setEno(Integer.parseInt(request.getParameter("eno")));
+        dto.setTitle(request.getParameter("title"));
+        dto.setContent(request.getParameter("content"));
+        dto.setAuthor((String) session.getAttribute("sid"));
+        announcementService.announcementInsert(dto);
+
+        return "redirect:/lotto/list.do";
     }
 }

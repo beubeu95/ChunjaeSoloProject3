@@ -37,13 +37,10 @@
                         <a href="${path}/member/login2.do">나의 정보 수정</a>
                     </li>
                     <li class="sidelist">
-                        <a href="list.html">Account Bill</a>
+                        <a href="${path}/">내가 쓴글</a>
                     </li>
                     <li class="sidelist">
-                        <a href="list.html">Our Features</a>
-                    </li>
-                    <li class="sidelist">
-                        <a href="list.html">Theme Facility</a>
+                        <a href="${path}">이벤트</a>
                     </li>
                 </ul>
             </div>
@@ -103,7 +100,7 @@
                                         </div>
                                     </div>
                                     <div class="column is-3-tablet pl-0">
-                                        <button type="button" class="btn btn-sm btn-outline-primary ml-4" onclick="findAddr()"> 우편번호 검색 </button>
+                                        <button type="button" class="btn btn-sm btn-outline-primary ml-4" onclick="findAddr()"> 우편번호 </button>
                                     </div>
                                 </div>
                             </div>

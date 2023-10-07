@@ -6,6 +6,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class MemberServiceImpl implements MemberService {
 
@@ -15,17 +17,20 @@ public class MemberServiceImpl implements MemberService {
     BCryptPasswordEncoder pwEncoder = new BCryptPasswordEncoder();
 
     @Override
-    public Member getMember(String id) {
+    public List<Member> memberList() throws Exception { return memberDAO.memberList(); }
+
+    @Override
+    public Member getMember(String id) throws Exception {
         return memberDAO.getMember(id);
     }
 
     @Override
-    public boolean idCheck(String id) {
+    public boolean idCheck(String id) throws Exception {
         return memberDAO.getMember(id) == null ? true : false;
     }
 
     @Override
-    public void memberInsert(Member member) {
+    public void memberInsert(Member member) throws Exception {
         memberDAO.memberInsert(member);
     }
 

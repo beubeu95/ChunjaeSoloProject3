@@ -8,9 +8,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>이벤트 글쓰기</title>
-    <jsp:include page="../setting/head.jsp"/>
+    <title>이벤트 수정하기</title>
     <script type="text/javascript" src="${path}/resources/ckeditor/ckeditor.js"></script>
+    <jsp:include page="../setting/head.jsp"/>
 </head>
 <body>
 
@@ -22,25 +22,26 @@
 <section class="page-title background-primary is-relative"  style="background-image: url('${path}/resources/images/bannerPage.jpg'); background-position: center; background-size: cover; height: 200px;">
     <div class="container">
         <div class="has-text-centered" style="padding-top: 60px;">
-            <h1 class="has-text-white font-tertiary" style="font-size: 40px; "> 이벤트 글쓰기</h1>
+            <h1 class="has-text-white font-tertiary" style="font-size: 40px; "> 이벤트 수정하기 </h1>
         </div>
     </div>
 </section>
 <!-- 배너 영역 끝 -->
 
-<!--이벤트 글쓰기 시작-->
+<!-- 수정하기 시작-->
 <div class="content" style="margin-top: 100px;">
     <div class="row column text-center">
         <div class="container">
-            <form action="${path }/event/insert.do" method="post">
-                <div class="field is-horizontal mb-0" style="height: 60px;">
+            <form action="${path }/event/edit.do" method="post">
+                <div class="field is-horizontal" style="height: 60px; margin-bottom:0px;">
                     <div class="field-label is-normal">
                         <label class="label">제목</label>
                     </div>
                     <div class="field-body">
                         <div class="field">
                             <p class="control">
-                                <input type="text" name="title" id="title" placeholder="제목 입력" maxlength="98" class="input" required>
+                                <input type="hidden" name="eno" id="eno" value="${event.eno }" >
+                                <input type="text" name="title" id="title" value="${event.title }" maxlength="98" class="input" required>
                             </p>
                         </div>
                     </div>
@@ -53,12 +54,20 @@
                         <div class="field">
                             <div class="control" style="padding-top:10px;">
                                 <label class="radio">
-                                    <input type="radio" name="status" id="now" value="1" checked>
-                                    진행중
+                                    <c:if test="${event.status == 1}">
+                                        <input type="radio" name="status" id="now" value="1" checked> 진행중
+                                    </c:if>
+                                    <c:if test="${event.status != 1}">
+                                        <input type="radio" name="status" id="now" value="1"> 진행중
+                                    </c:if>
                                 </label>
                                 <label class="radio">
-                                    <input type="radio" name="status" id="end" value="0">
-                                    종료
+                                    <c:if test="${event.status == 0}">
+                                        <input type="radio" name="status" id="end" value="0" checked> 종료
+                                    </c:if>
+                                    <c:if test="${event.status != 0}">
+                                        <input type="radio" name="status" id="end" value="0"> 종료
+                                    </c:if>
                                 </label>
                             </div>
                         </div>
@@ -71,7 +80,7 @@
                     <div class="field-body">
                         <div class="field">
                             <p class="control">
-                                <input type="date" name="sdate" id="sdate" class="input" placeholder="시작일 지정해주세요" autocomplete="off" required>
+                                <input type="date" name="sdate" id="sdate" class="input" placeholder="시작일 지정해주세요" value="${event.sdate}" autocomplete="off" required>
                             </p>
                         </div>
                     </div>
@@ -83,7 +92,7 @@
                     <div class="field-body">
                         <div class="field">
                             <p class="control">
-                                <input type="date" name="edate" id="edate" class="input" placeholder="종료일 지정해주세요" autocomplete="off" required>
+                                <input type="date" name="edate" id="edate" class="input" placeholder="종료일 지정해주세요" value="${event.edate}" autocomplete="off" required>
                             </p>
                         </div>
                     </div>
@@ -95,7 +104,9 @@
                     <div class="field-body">
                         <div class="field">
                             <div class="control">
-                                <textarea name="content" id="content" class="textarea" placeholder="내용 입력" rows="8" cols="100" maxlength="1400" required></textarea>
+                                <textarea name="content" id="content" class="textarea" placeholder="내용 입력" rows="8" cols="100" maxlength="1400" required>
+                                    ${event.content}
+                                </textarea>
                                 <script>
                                     CKEDITOR.replace('content',	{filebrowserUploadUrl:'${path}/event/imageUpload.do'});
                                 </script>
@@ -105,11 +116,12 @@
                 </div>
                 <div class="button-group" style="margin-top: 30px; margin-bottom: 100px;">
                     <c:if test='${sid eq "admin"}'>
-                        <input type="submit" class="button is-primary" style="float:right; margin-left:10px; background-color: #FF0043;" value="글 등록" >
+                        <input type="submit" class="button is-primary" style="float:right; margin-left:10px; background-color: #FF0043;" value="글 수정" >
                         <a class="button" href="${path }/event/list.do" style="color:#000000; text-decoration:none; float:right;">글 목록</a>
                     </c:if>
                 </div>
             </form>
+
             <script>
                 // 시작일 변경 시 종료일 처리
                 $("#sdate").change(() => {
@@ -127,8 +139,7 @@
         </div>
     </div>
 </div>
-
-<!--이벤트 글쓰기 끝-->
+<!-- 수정하기 끝-->
 
 
 <!-- 푸터 시작 -->

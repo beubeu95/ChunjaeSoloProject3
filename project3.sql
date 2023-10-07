@@ -177,18 +177,39 @@ CREATE TABLE event (
 SELECT * FROM EVENT;
 
 --이벤트 신청자 정보 테이블 생성
-CREATE TABLE apply(
-	appNo INT PRIMARY KEY AUTO_INCREMENT,
-	eno INT NOT NULL,
-	name VARCHAR(20) NOT NULL,
-	email VARCHAR(100) NOT NULL,
-	tel VARCHAR(20) NOT NULL,
-	addr1 VARCHAR(200),
-	addr2 VARCHAR(100),
-	postcode VARCHAR(10),
-	FOREIGN KEY(eno) REFERENCES event(eno) ON DELETE CASCADE,
-	FOREIGN KEY(name) REFERENCES member(id) ON DELETE CASCADE
-);
-
+create table apply(
+   appno int AUTO_INCREMENT PRIMARY KEY,	
+   eno int not NULL,								
+   id varchar(100) not NULL,					
+   name varchar(100) not NULL,				
+   tel varchar(13),								
+   foreign key(eno) references event(eno) on delete cascade,
+   FOREIGN KEY(id) references member(id) on delete cascade);
+   
 SELECT * FROM apply;
 
+-- 이벤트 당첨자 테이블 생성
+CREATE TABLE lotto(
+	appno int AUTO_INCREMENT primary KEY NOT NULL ,			
+   eno int NOT NULL,										
+   id varchar(100) NOT NULL,										
+   name varchar(100) NOT NULL,						
+   tel varchar(13),													
+   foreign key(eno) references event(eno) on delete cascade,
+   FOREIGN key(id) references member(id) on delete CASCADE);
+
+SELECT * FROM lotto;
+
+-- 당첨자 발표 테이블 생성
+CREATE TABLE announcement(
+	ano int PRIMARY KEY AUTO_INCREMENT,		
+   eno int NOT NULL,									
+   title varchar(100),							
+   content varchar(1000),						
+   author varchar(100),							
+   resdate datetime DEFAULT CURRENT_TIMESTAMP,	
+   cnt INT DEFAULT 0 NOT NULL,
+   FOREIGN key(eno) references event(eno));
+
+   
+SELECT * FROM announcement;

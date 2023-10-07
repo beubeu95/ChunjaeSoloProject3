@@ -42,7 +42,7 @@ public class MemberController {
     }
 
     @RequestMapping(value="join.do", method=RequestMethod.POST)
-    public String joinPro(ServletRequest request, ServletResponse response, Model model) {
+    public String joinPro(ServletRequest request, ServletResponse response, Model model) throws Exception {
         Member member = new Member();
         String ppw = request.getParameter("pw");
         String pw = pwEncoder.encode(ppw);
@@ -77,7 +77,7 @@ public class MemberController {
     }
     @RequestMapping("login2.do")
     public String memberLoginForm2(Model model) throws Exception {
-        return "/member/loginmypage";
+        return "/member/mypagecheck";
     }
     @RequestMapping(value = "loginpro.do", method = RequestMethod.POST)
     public String memberLogin(@RequestParam String id, @RequestParam String pw, Model model) throws Exception {
