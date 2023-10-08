@@ -2,6 +2,7 @@ package kr.co.teaspoon.service;
 
 import kr.co.teaspoon.dao.EventDAO;
 import kr.co.teaspoon.dto.Event;
+import kr.co.teaspoon.dto.EventVO;
 import kr.co.teaspoon.util.Page;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -17,6 +18,11 @@ public class EventServiceImpl implements EventService {
     @Override
     public List<Event> eventList(Page page) throws Exception {
         return eventDAO.eventList(page);
+    }
+
+    @Override
+    public List<EventVO> myEventList(String id) throws Exception {
+        return eventDAO.myEventList(id);
     }
 
     @Override

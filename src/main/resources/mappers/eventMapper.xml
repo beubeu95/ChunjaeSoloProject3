@@ -5,6 +5,11 @@
     <select id="eventList" resultType="kr.co.teaspoon.dto.Event">
         select * from event order by status desc
     </select>
+
+    <select id="myEventList" resultType="kr.co.teaspoon.dto.EventVO">
+        SELECT a.eno, a.title, a.content, a.status FROM event a JOIN apply b ON a.eno = b.eno WHERE b.id = #{id}
+    </select>
+
     <!-- 이벤트 상세보기 -->
     <select id="eventDetail" resultType="kr.co.teaspoon.dto.Event">
         select * from event where eno=#{eno}

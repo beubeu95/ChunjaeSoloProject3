@@ -37,10 +37,10 @@
                         <a href="${path}/member/login2.do">나의 정보 수정</a>
                     </li>
                     <li class="sidelist">
-                        <a href="${path}/">내가 쓴글</a>
+                        <a href="${path}/member/mngt.do">내가 쓴글</a>
                     </li>
                     <li class="sidelist">
-                        <a href="${path}">이벤트</a>
+                        <a href="${path}/member/eventMngt.do">이벤트</a>
                     </li>
                 </ul>
             </div>

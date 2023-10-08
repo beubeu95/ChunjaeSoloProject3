@@ -37,13 +37,8 @@
                             <div>
                             <!-- 이벤트 관리자만 글쓰기 가능 처리 -->
                             <c:if test='${sid eq "admin"}'>
-<<<<<<< HEAD
                                 <div class="button-group" style="float:right; margin-left:20px;">
                                     <a class="btn btn-sm btn-outline-primary ml-4" href="${path }/event/insert.do" style="text-decoration: none; margin-bottom: 24px;">글쓰기</a>
-=======
-                                <div class="button-group" style="float:right; margin-left:20px; margin-bottom:30px;">
-                                    <a class="btn btn-sm btn-outline-primary ml-4" href="${path }/event/insert.do" style="text-decoration: none;">글쓰기</a>
->>>>>>> 75a58f382c510fa132e7c0dadf526e9beaa60860
                                 </div>
                             </c:if>
                             </div>

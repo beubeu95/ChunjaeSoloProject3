@@ -10,6 +10,7 @@ import java.util.List;
 
 public interface CommunityService {
     public List<CommunityVO> communityList(CommunityPage page) throws Exception;
+    public List<CommunityVO> myCommunityList(String author) throws Exception;
     public List<Category> categoryList() throws Exception;
     public int getCount(Page page) throws Exception;
     public CommunityVO communityDetail(int cno) throws Exception;

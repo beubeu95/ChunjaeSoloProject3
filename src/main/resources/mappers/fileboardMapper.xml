@@ -5,6 +5,10 @@
     <select id="fileboardList" resultType="kr.co.teaspoon.dto.Fileboard">
         select * from fileboard order by regdate desc
     </select>
+
+    <select id="myFileboardList" resultType="kr.co.teaspoon.dto.Fileboard">
+        select * from fileboard where id=#{id} order by regdate desc
+    </select>
     <!-- 자료실 상세보기 -->
     <select id="fileboardDetail" resultType="kr.co.teaspoon.dto.Fileboard">
         select * from fileboard where articleno=#{articleno}

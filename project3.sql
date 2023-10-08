@@ -138,7 +138,8 @@ CREATE TABLE fileboard (
   id varchar(16) NOT NULL,
   title varchar(100) NOT NULL,
   content varchar(2000) NOT NULL,
-  regdate timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP
+  regdate timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  FOREIGN KEY(id) REFERENCES member(id) ON DELETE CASCADE
 );
 
 SELECT * FROM fileboard;

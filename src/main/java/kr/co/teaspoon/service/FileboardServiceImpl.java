@@ -35,6 +35,11 @@ public class FileboardServiceImpl implements FileboardService {
     }
 
     @Override
+    public List<Fileboard> myFileList(String id) throws Exception {
+        return fileboardDAO.myFileList(id);
+    }
+
+    @Override
     public Fileboard fileDetail(int articleno) throws Exception {
         return  fileboardDAO.fileDetail(articleno);
     }

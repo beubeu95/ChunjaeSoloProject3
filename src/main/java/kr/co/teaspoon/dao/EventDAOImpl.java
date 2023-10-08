@@ -1,6 +1,7 @@
 package kr.co.teaspoon.dao;
 
 import kr.co.teaspoon.dto.Event;
+import kr.co.teaspoon.dto.EventVO;
 import kr.co.teaspoon.util.Page;
 import org.apache.ibatis.session.SqlSession;
 import org.checkerframework.checker.units.qual.A;
@@ -19,6 +20,11 @@ public class EventDAOImpl implements EventDAO{
     @Override
     public List<Event> eventList(Page page) throws Exception {
         return sqlSession.selectList("event.eventList", page);
+    }
+
+    @Override
+    public List<EventVO> myEventList(String id) throws Exception {
+        return sqlSession.selectList("event.myEventList", id);
     }
 
     @Override

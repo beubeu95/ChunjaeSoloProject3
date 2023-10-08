@@ -19,6 +19,11 @@ public class QnaDAOImpl implements QnaDAO{
     }
 
     @Override
+    public List<Qna> myQnaList(String author) throws Exception {
+        return sqlSession.selectList("qna.myQnaList", author);
+    }
+
+    @Override
     public List<Qna> noAnswerList() throws Exception {
         return sqlSession.selectList("qna.noAnswerList");
     }

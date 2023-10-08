@@ -25,6 +25,11 @@ public class CommunityServiceImpl implements CommunityService {
     }
 
     @Override
+    public List<CommunityVO> myCommunityList(String author) throws Exception {
+        return communityDAO.communityList(author);
+    }
+
+    @Override
     public int getCount(Page page) throws Exception {
         return communityDAO.getCount(page);
     }

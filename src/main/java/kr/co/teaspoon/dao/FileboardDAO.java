@@ -8,6 +8,7 @@ public interface FileboardDAO {
     public void writeArticle(Fileboard fileboardDto) throws Exception;
     public void fileRegister(Fileboard fileboardDto) throws Exception;
     public List<Fileboard> fileList() throws Exception;
+    public List<Fileboard> myFileList(String id) throws Exception;
     public Fileboard fileDetail(int articleno) throws Exception;
 
     public void fileboardDelete(int articleno) throws Exception;

@@ -9,6 +9,8 @@ import java.util.List;
 
 public interface CommunityDAO {
     public List<CommunityVO> communityList(Page page) throws Exception;
+
+    public List<CommunityVO> communityList(String author) throws Exception;
     public int getCount(Page page) throws Exception;
     public List<Category> categeryList() throws Exception;
     public CommunityVO communityDetail(int cno) throws Exception;

@@ -28,6 +28,11 @@ public class FileboardDAOImpl implements FileboardDAO{
     }
 
     @Override
+    public List<Fileboard> myFileList(String id) throws Exception {
+        return sqlSession.selectList("fileboard.myFileboardList", id);
+    }
+
+    @Override
     public Fileboard fileDetail(int articleno) throws Exception {
         return sqlSession.selectOne("fileboard.fileboardDetail", articleno);
     }

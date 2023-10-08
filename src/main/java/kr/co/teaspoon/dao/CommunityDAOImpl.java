@@ -23,6 +23,11 @@ public class CommunityDAOImpl implements CommunityDAO {
     }
 
     @Override
+    public List<CommunityVO> communityList(String author) throws Exception {
+        return sqlSession.selectList("community.myCommunityList", author);
+    }
+
+    @Override
     public int getCount(Page page) throws Exception {
         return sqlSession.selectOne("community.getCount", page);
     }

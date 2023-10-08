@@ -9,6 +9,7 @@ public interface QnaDAO {
 
     public List<Qna> qnaList() throws Exception;
     public List<Qna> noAnswerList() throws Exception;
+    public List<Qna> myQnaList(String author) throws Exception;
     public Qna qnaDetail(int qno) throws Exception;
     public int getCount(Page page) throws Exception;
     public int noAnswerCount(Page page) throws Exception;

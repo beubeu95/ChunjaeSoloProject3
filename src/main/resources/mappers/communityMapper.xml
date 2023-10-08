@@ -31,6 +31,10 @@
         ]]>
     </select>
 
+    <select id="myCommunityList" resultType="kr.co.teaspoon.dto.CommunityVO">
+        select cno, cateName, title, content, author, resdate, cnt from community comm join category cat on(comm.cate=cat.cate) where author=#{author} ORDER BY cno DESC
+    </select>
+
     <!-- community의 전체 개수 구하기 -->
     <select id="getCount" resultType="integer">
         select count(*) from community

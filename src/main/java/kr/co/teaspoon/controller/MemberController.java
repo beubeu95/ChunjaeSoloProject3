@@ -1,7 +1,9 @@
 package kr.co.teaspoon.controller;
 
-import kr.co.teaspoon.dto.Member;
-import kr.co.teaspoon.service.MemberService;
+import kr.co.teaspoon.dto.*;
+import kr.co.teaspoon.service.*;
+import kr.co.teaspoon.util.CommentPage;
+import kr.co.teaspoon.util.CommunityPage;
 import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -18,6 +20,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.PrintWriter;
+import java.util.List;
 
 @Controller
 @RequestMapping("/member/*")
@@ -25,6 +28,21 @@ public class MemberController {
 
     @Autowired
     private MemberService memberService;
+
+    @Autowired
+    private EventService eventService;
+
+    @Autowired
+    private FileboardService fileboardService;
+
+    @Autowired
+    private CommunityService communityService;
+
+    @Autowired
+    private QnaService qnaService;
+
+    @Autowired
+    private CommentService commentService;
 
     @Autowired
     HttpSession session;
@@ -108,13 +126,6 @@ public class MemberController {
         return "redirect:/";
     }
 
-    @GetMapping("mypage.do")
-    public String mypage(Model model) throws Exception {
-        String id = (String) session.getAttribute("sid");
-        Member member = memberService.getMember(id);
-        model.addAttribute("member", member);
-        return "/member/mypage";
-    }
     @RequestMapping(value="update.do", method=RequestMethod.POST)
     public String memberUpdate(Member member, Model model) throws Exception {
         String pwd = "";
@@ -132,4 +143,81 @@ public class MemberController {
         session.invalidate();
         return "redirect:/";
     }
+
+    @GetMapping("mypage.do")
+    public String mypage(Model model) throws Exception {
+        String id = (String) session.getAttribute("sid");
+        Member member = memberService.getMember(id);
+        model.addAttribute("member", member);
+        return "/member/mypage";
+    }
+
+    @GetMapping("mngt.do")
+    public String mypageMngt(HttpServletRequest request, HttpServletResponse response,Model model) throws Exception{
+        String id = (String) session.getAttribute("sid");
+        String category = request.getParameter("cate");
+
+        List<Category> categories = communityService.categoryList();
+        List<CommunityVO> community = communityService.myCommunityList("id");
+
+        model.addAttribute("curCategory", category);
+        model.addAttribute("categories", categories);
+        model.addAttribute("community", community);
+
+        return "/member/mypageMngt";
+    }
+
+    @GetMapping("getCommunity.do")
+    public String communityDetail(HttpServletRequest request, Model model) throws Exception {
+        CommunityVO comm = communityService.communityDetail(Integer.parseInt(request.getParameter("cno")));
+
+        // 댓글 목록의 페이지
+        int commentPage = request.getParameter("commentPage") != null ? Integer.parseInt(request.getParameter("commentPage")) : 1;
+
+        // 댓글 페이징 처리
+        CommentPage page = new CommentPage();
+
+        List<Comment> commentList = commentService.commentList(page);
+
+        model.addAttribute("detail", comm);
+        model.addAttribute("commentList", commentList);
+        model.addAttribute("commentPage", commentPage);
+        model.addAttribute("page", page);
+        model.addAttribute("cate", request.getParameter("cate"));
+
+        return "/community/communityDetail";
+    }
+
+    @GetMapping("fileMngt.do")
+    public String fileMngt(Model model) throws Exception{
+        String id = (String) session.getAttribute("sid");
+
+        List<Fileboard> fileboardList = fileboardService.myFileList("id");
+        model.addAttribute("fileboardList", fileboardList);
+
+        return "/member/fileMngt";
+    }
+
+    @GetMapping("qnaMngt.do")
+    public String qnaMngt(Model model) throws Exception{
+        String id = (String) session.getAttribute("sid");
+
+        List<Qna> qnaList = qnaService.myQnaList("id");
+        model.addAttribute("qnaList", qnaList);
+
+        return "/member/qnaMngt";
+    }
+
+    @GetMapping("eventMngt.do")
+    public String eventMngt(Model model) throws Exception{
+        String id = (String) session.getAttribute("sid");
+
+        List<EventVO> eventList = eventService.myEventList("id");
+        model.addAttribute("eventList", eventList);
+
+        return "/member/eventMngt";
+    }
+
+
+
 }
