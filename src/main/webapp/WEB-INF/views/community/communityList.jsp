@@ -35,21 +35,21 @@
     <div class="container">
         <div class="buttons has-addons is-centered mb-5">
             <c:if test="${empty curCategory}">
-                <label class="btn btn-sm btn-primary ml-4 is-active">
+                <label class="btn btn-sm btn-primary ml-4 is-active" style="padding-right:40px;">
             </c:if>
             <c:if test="${!empty curCategory}">
-                <label class="btn btn-sm btn-primary ml-4">
+                <label class="btn btn-sm btn-primary ml-4" style="padding-right:40px;">
             </c:if>
-                <input type="radio" checked="checked" onclick="javascript:location.href='${path}/community/list.do'"/> 전체
+                <input type="radio" style="opacity: 0;" checked="checked" onclick="javascript:location.href='${path}/community/list.do'"/> 전체
                 </label>
             <c:forEach var="cate" items="${categories}">
                 <c:if test="${cate.cate eq curCategory}">
-                    <label class="btn btn-sm btn-primary ml-4 is-active">
+                    <label class="btn btn-sm btn-primary ml-4 is-active" style="padding-right:40px;">
                 </c:if>
                 <c:if test="${cate.cate ne curCategory}">
-                    <label class="btn btn-sm btn-primary ml-4">
+                    <label class="btn btn-sm btn-primary ml-4" style="padding-right:40px;">
                 </c:if>
-                    <input type="radio" checked="checked" onclick="javascript:location.href='${path}/community/list.do?cate=${cate.cate}'"/> ${cate.cateName}
+                    <input type="radio" style="opacity: 0;" checked="checked" onclick="javascript:location.href='${path}/community/list.do?cate=${cate.cate}'"/> ${cate.cateName}
                     </label>
             </c:forEach>
         </div>

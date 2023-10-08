@@ -64,6 +64,8 @@
         <bean id="applyService" class="kr.co.teaspoon.dao.ApplyDAOImpl" />
         <bean id="announcementDAO" class="kr.co.teaspoon.dao.AnnouncementDAOImpl" />
         <bean id="announcementService" class="kr.co.teaspoon.service.AnnouncementServiceImpl" />
+        <bean id="lottoDAO" class="kr.co.teaspoon.dao.LottoDAOImpl" />
+        <bean id="lottoService" class="kr.co.teaspoon.service.LottoServiceImpl" />
 
 
         <!-- @Transactional 어노테이션 처리 -->
