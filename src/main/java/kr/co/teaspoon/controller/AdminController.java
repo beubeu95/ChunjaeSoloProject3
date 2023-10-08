@@ -24,9 +24,6 @@ public class AdminController {
     private FileboardService fileboardService;
 
     @Autowired
-    private FileInfoService fileInfoService;
-
-    @Autowired
     private MemberService memberService;
 
     @Autowired
@@ -34,9 +31,6 @@ public class AdminController {
 
     @Autowired
     private LottoService lottoService;
-
-    @Autowired
-    private CommunityService communityService;
 
     @Autowired
     private QnaService qnaService;
@@ -66,25 +60,10 @@ public class AdminController {
         //QnaList
         List<Qna> noAnswerList = qnaService.noAnswerList();
         model.addAttribute("noAnswerList", noAnswerList);     //QnA 목록
-        return "/admin/noAnswerList";
+        return "/admin/qnaList";
     }
 
-    @GetMapping("adminFileList.do")		//board/list.do
-    public String getBoardList(Model model) throws Exception {
-        List<Fileboard> fileboardList = fileboardService.fileList();
-        model.addAttribute("fileboardList", fileboardList);
-        return "/admin/adminFileboard";
-    }
-
-
-    @GetMapping("delete.do")
-    public String noticeDelete(HttpServletRequest request, Model model) throws Exception {
-        int articleno = Integer.parseInt(request.getParameter("articleno"));
-        fileboardService.fileboardDelete(articleno);
-        return "redirect:adminList.do";
-    }
-
-    @GetMapping("adminEventList.do")
+    @GetMapping("eventlist.do")
     public String getEventList(HttpServletRequest request, HttpServletResponse response, Model model) throws Exception {
         int curPage = request.getParameter("page") != null ? Integer.parseInt(request.getParameter("page")) : 1;
 
@@ -103,14 +82,14 @@ public class AdminController {
         model.addAttribute("page", page);
 
 
-        return "/admin/adminEventList";
+        return "/admin/eventList";
     }
 
-    @GetMapping("adminMemberList.do")
+    @GetMapping("memberlist.do")
     public String adminMemberList(Model model) throws Exception {
         List<Member> memberList = memberService.memberList();
         model.addAttribute("memberList", memberList);
-        return "/admin/adminMemberList";
+        return "/admin/memberList";
     }
 
     @RequestMapping(value="memberDelete.do", method = RequestMethod.GET)
@@ -139,7 +118,7 @@ public class AdminController {
         List<Lotto> lottoList = lottoService.lottoList(eno);
         model.addAttribute("lottoList", lottoList);
         model.addAttribute("eno", eno);
-        return "/admin/winners";
+        return "/admin/lottoList";
     }
 
     @GetMapping("lottoInsert.do")
@@ -160,7 +139,7 @@ public class AdminController {
             lotto.setId(id);
         }
         Event event = eventService.eventDetail(eno);
-        model.addAttribute("lottoLost", lottoList);
+        model.addAttribute("lottoList", lottoList);
         model.addAttribute("event", event);
 
         return "/admin/lottoInsert";

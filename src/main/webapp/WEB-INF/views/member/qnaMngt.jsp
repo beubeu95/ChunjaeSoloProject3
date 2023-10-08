@@ -71,7 +71,7 @@
                 </div>
 
                 <div class="container">
-                    <table class="table is-fullwidth is-center">
+                    <table class="table is-fullwidth is-center" id="qna-table">
                         <thead>
                         <tr>
                             <th width="15%" class="has-text-centered">글번호</th>
@@ -105,38 +105,11 @@
                         </c:if>
                         </tbody>
                     </table>
-
-                    <nav class="pagination is-rounded is-centered mb-6" role="navigation" aria-label="pagination">
-                        <c:if test="${curPage > 5}">
-                            <a href="${path}/member/qnaMngt.do?page=${page.blockStartNum - 1}"
-                               class="pagination-previous">Previous</a>
-                        </c:if>
-                        <c:if test="${page.blockLastNum < page.totalPageCount}">
-                            <a href="${path}/member/qnaMngt.do?page=${page.blockLastNum + 1}"
-                               class="pagination-next">Next page</a>
-                        </c:if>
-
-                        <ul class="pagination-list">
-                            <c:forEach var="i" begin="${page.blockStartNum}" end="${page.blockLastNum}">
-                                <c:choose>
-                                    <c:when test="${i == curPage}">
-                                        <li>
-                                            <a href="${path}/member/qnaMngt.do?page=${i}"
-                                               class="pagination-link is-current" aria-label="Page ${i}"
-                                               aria-current="page">${i}</a>
-                                        </li>
-                                    </c:when>
-                                    <c:otherwise>
-                                        <li>
-                                            <a href="${path}/member/qnaMngt.do?page=${i}"
-                                               class="pagination-link" aria-label="Page ${i}"
-                                               aria-current="page">${i}</a>
-                                        </li>
-                                    </c:otherwise>
-                                </c:choose>
-                            </c:forEach>
-                        </ul>
-                    </nav>
+                    <script type="text/javascript">
+                        jQuery(function ($){
+                            $("#qna-table").DataTable();
+                        })
+                    </script>
                 </div>
             </div>
         </div>

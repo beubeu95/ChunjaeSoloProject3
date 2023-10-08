@@ -58,7 +58,7 @@
                         <a href="${path}/member/logout.do" class="btn btn-sm btn-primary ml-4">LogOut</a>
                     </c:if>
                     <c:if test="${sid ne null and sid eq 'admin'}">
-                        <a href="${path}/admin/list.do" class="btn btn-sm btn-outline-primary ml-4">Admin</a>
+                        <a href="${path}/admin/memberlist.do" class="btn btn-sm btn-outline-primary ml-4">Admin</a>
                         <a href="${path}/member/logout.do" class="btn btn-sm btn-primary ml-4">LogOut</a>
                     </c:if>
                 </div>

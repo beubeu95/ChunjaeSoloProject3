@@ -62,7 +62,7 @@
                 </div>
 
                 <div class="container">
-                    <table class="table is-hoverable is-fullwidth" >
+                    <table class="table is-hoverable is-fullwidth" id="board-table">
                         <thead>
                         <tr>
                             <th class="has-text-centered"> # </th>
@@ -91,38 +91,12 @@
                         </c:if>
                         </tbody>
                     </table>
+                    <script type="text/javascript">
+                        jQuery(function ($){
+                            $("#board-table").DataTable();
+                        })
+                    </script>
 
-                    <nav class="pagination is-rounded is-centered mb-6" role="navigation" aria-label="pagination">
-                        <c:if test="${curPage > 5}">
-                            <a href="${path}/member/mngt.do?page=${page.blockStartNum - 1}"
-                               class="pagination-previous">Previous</a>
-                        </c:if>
-                        <c:if test="${page.blockLastNum < page.totalPageCount}">
-                            <a href="${path}/member/mngt.do?page=${page.blockLastNum + 1}"
-                               class="pagination-next">Next page</a>
-                        </c:if>
-
-                        <ul class="pagination-list">
-                            <c:forEach var="i" begin="${page.blockStartNum}" end="${page.blockLastNum}">
-                                <c:choose>
-                                    <c:when test="${i == curPage}">
-                                        <li>
-                                            <a href="${path}/member/mngt.do?page=${i}"
-                                               class="pagination-link is-current" aria-label="Page ${i}"
-                                               aria-current="page">${i}</a>
-                                        </li>
-                                    </c:when>
-                                    <c:otherwise>
-                                        <li>
-                                            <a href="${path}/member/mngt.do?page=${i}"
-                                               class="pagination-link" aria-label="Page ${i}"
-                                               aria-current="page">${i}</a>
-                                        </li>
-                                    </c:otherwise>
-                                </c:choose>
-                            </c:forEach>
-                        </ul>
-                    </nav>
                 </div>
             </div>
         </div>
